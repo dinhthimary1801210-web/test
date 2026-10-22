@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quảng Ngãi - Vùng Đất Ấn Tượng & Huyền Diệu</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ocean: '#0284c7',    /* Xanh biển sâu */
+                            sky: '#38bdf8',      /* Xanh trời tươi */
+                            teal: '#0d9488',     /* Xanh ngọc đảo */
+                            sun: '#f59e0b',      /* Nắng vàng ngọc */
+                            sand: '#fef3c7',     /* Cát vàng */
+                            dark: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Navigation */
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284c7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0369a1;
+        }
+
+        /* Hero Parallax Overlay */
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Card Hover Effects */
+        .card-zoom {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-zoom:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .card-zoom:hover .card-img {
+            transform: scale(1.08);
+        }
+        .card-img {
+            transition: transform 0.5s ease;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #0284c7 0%, #0d9488 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tab Active State */
+        .tab-btn.active {
+            background-color: #0284c7;
+            color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="fixed top-0 left-0 w-full z-50 nav-glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#trang-chu" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-ocean to-brand-teal flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-brand-ocean/30 group-hover:rotate-6 transition-transform">
+                        QNg
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-wider text-slate-800 block leading-tight">QUẢNG NGÃI</span>
+                        <span class="text-[10px] text-brand-ocean font-semibold tracking-widest uppercase block">Ấn Tượng & Huyền Diệu</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-4">
+                    <a href="#trang-chu" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-brand-ocean hover:bg-sky-50 transition-colors">Trang chủ</a>
+                    <a href="#danh-thang" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-brand-ocean hover:bg-sky-50 transition-colors">Danh thắng</a>
+                    <a href="#van-hoa" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-brand-ocean hover:bg-sky-50 transition-colors">Văn hóa & Lịch sử</a>
+                    <a href="#am-thuc" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-brand-ocean hover:bg-sky-50 transition-colors">Ẩm thực</a>
+                    <a href="#cam-nang" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-brand-ocean hover:bg-sky-50 transition-colors">Cẩm nang</a>
+                    <a href="#kham-pha" class="ml-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-ocean to-brand-teal text-white text-sm font-semibold hover:shadow-lg hover:shadow-brand-ocean/30 transition-all hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-compass mr-1.5"></i> Khám phá ngay
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-brand-ocean focus:outline-none p-2 rounded-lg">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-b border-slate-200 px-4 pt-2 pb-6 space-y-2">
+            <a href="#trang-chu" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-700 hover:bg-sky-50 hover:text-brand-ocean font-medium">Trang chủ</a>
+            <a href="#danh-thang" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-700 hover:bg-sky-50 hover:text-brand-ocean font-medium">Danh thắng</a>
+            <a href="#van-hoa" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-700 hover:bg-sky-50 hover:text-brand-ocean font-medium">Văn hóa & Lịch sử</a>
+            <a href="#am-thuc" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-700 hover:bg-sky-50 hover:text-brand-ocean font-medium">Ẩm thực</a>
+            <a href="#cam-nang" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-700 hover:bg-sky-50 hover:text-brand-ocean font-medium">Cẩm nang</a>
+            <a href="#kham-pha" class="mobile-link block px-4 py-2.5 rounded-lg bg-gradient-to-r from-brand-ocean to-brand-teal text-white font-semibold text-center mt-2">Khám phá ngay</a>
+        </div>
+    </nav>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="trang-chu" class="hero-bg min-h-screen flex items-center justify-center relative pt-20 px-4">
+        <div class="max-w-5xl mx-auto text-center text-white z-10 py-16">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 text-brand-sand text-sm font-medium animate-pulse">
+                <i class="fa-solid fa-star text-brand-sun"></i> Điểm Đến Du Lịch Hấp Dẫn 2026
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                Quảng Ngãi <br class="hidden sm:inline"/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-emerald-300 to-amber-300">Vùng Đất Ấn Tượng & Huyền Diệu</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+                Nơi thiên nhiên giao hòa giữa núi Thiên Ấn và sông Trà Giang hùng vĩ. Nơi thiên đường biển đảo Lý Sơn khoác lên mình vẻ đẹp hoang sơ, mê đắm lòng người.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#danh-thang" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-sun hover:bg-amber-500 text-slate-900 font-bold text-base shadow-lg shadow-amber-500/30 transition-all hover:scale-105">
+                    Khám Phá Danh Thắng <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#tong-quan" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-semibold text-base transition-all">
+                    Tìm Hiểu Thêm
+                </a>
+            </div>
+
+            <!-- Highlights counter/info badge -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-10 border-t border-white/15">
+                <div class="p-3">
+                    <p class="text-3xl font-extrabold text-brand-sun">130+ km</p>
+                    <p class="text-xs text-slate-300 mt-1">Đường bờ biển thơ mộng</p>
+                </div>
+                <div class="p-3">
+                    <p class="text-3xl font-extrabold text-brand-sky">Đảo Lý Sơn</p>
+                    <p class="text-xs text-slate-300 mt-1">Vương quốc Tỏi & Núi lửa</p>
+                </div>
+                <div class="p-3">
+                    <p class="text-3xl font-extrabold text-emerald-400">3.000 Năm</p>
+                    <p class="text-xs text-slate-300 mt-1">Nền văn hóa Sa Huỳnh</p>
+                </div>
+                <div class="p-3">
+                    <p class="text-3xl font-extrabold text-amber-300">Đặc Sản</p>
+                    <p class="text-xs text-slate-300 mt-1">Don Sông Trà & Mạch Nha</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave Separator -->
+        <div class="absolute bottom-0 left-0 right-0 overflow-hidden leading-none z-10 pointer-events-none">
+            <svg class="relative block w-full h-12 sm:h-20 text-slate-50" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0 C150,90 350,-40 500,50 C650,140 900,10 1200,40 L1200,120 L0,120 Z" fill="currentColor"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ================= TỔNG QUAN QUẢNG NGÃI ================= -->
+    <section id="tong-quan" class="py-16 sm:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Text Info -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-100 text-brand-ocean font-semibold text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-map-location-dot"></i> Vị trí & Thiên nhiên
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                        Vùng Đất <span class="text-brand-ocean">"Sông Trà - Núi Ấn"</span> Thơ Mộng
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-base sm:text-lg">
+                        Quảng Ngãi nằm ở dải đất miền Trung Việt Nam, tựa lưng vào dãy Trường Sơn hùng vĩ và hướng mặt ra Biển Đông bao la. Vùng đất này sở hữu cảnh quan thiên nhiên vô cùng đa dạng từ đồng bằng, đồi núi cho đến những bãi biển xanh ngắt và núi lửa cổ triệu năm.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Biểu tượng danh xưng <strong>"Ấn Quang Sông Trà"</strong> bắt nguồn từ hình ảnh núi Thiên Ấn như con dấu vuông vắn nằm bên dòng sông Trà Giang hiền hòa. Không chỉ dừng lại ở cảnh sắc, người dân Quảng Ngãi còn vô cùng kiên cường, nồng hậu, hiếu khách và giữ gìn trọn vẹn nét văn hóa truyền thống diệu kỳ.
+                    </p>
+                    <div class="pt-2 grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 p-3 rounded-xl bg-white shadow-sm border border-slate-100">
+                            <div class="w-10 h-10 rounded-lg bg-sky-100 text-brand-ocean flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-sun text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Khí hậu</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Nhiệt đới gió mùa, tràn ngập nắng ấm quanh năm.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-xl bg-white shadow-sm border border-slate-100">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-people-group text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Con người</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Chân thành, cần cù, hiếu khách và kiên cường.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Grid Gallery Showcase -->
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="overflow-hidden rounded-2xl shadow-md h-52 sm:h-64">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Biển Lý Sơn" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="overflow-hidden rounded-2xl shadow-md h-40 sm:h-48 bg-brand-ocean p-6 text-white flex flex-col justify-between">
+                            <i class="fa-solid fa-quote-left text-3xl opacity-30"></i>
+                            <p class="font-medium text-sm italic">"Bao giờ núi Ấn hết tranh, Sông Trà hết nước anh đành xa em..."</p>
+                            <span class="text-xs text-sky-200 font-semibold">— Ca dao Quảng Ngãi</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <div class="overflow-hidden rounded-2xl shadow-md h-40 sm:h-48">
+                            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Bình minh trên biển" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="overflow-hidden rounded-2xl shadow-md h-52 sm:h-64">
+                            <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" alt="Thiên nhiên Quảng Ngãi" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DANH THẮNG NỔI BẬT ================= -->
+    <section id="danh-thang" class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-100 text-brand-sun font-semibold text-xs uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-camera"></i> Điểm Đến Hấp Dẫn
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Danh Thắng & Địa Danh Nổi Tiếng</h2>
+                <p class="text-slate-600 mt-3 text-base">Khám phá những vẻ đẹp hoang sơ, tuyệt mỹ từ biển đảo trù phú cho đến các di tích danh thắng lịch sử linh thiêng.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10" id="filter-buttons">
+                <button class="tab-btn active px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-200 hover:border-brand-ocean transition-all" data-filter="all">Tất cả</button>
+                <button class="tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 border border-slate-200 hover:border-brand-ocean transition-all" data-filter="bien-dao">Biển đảo</button>
+                <button class="tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 border border-slate-200 hover:border-brand-ocean transition-all" data-filter="tam-linh">Tâm linh & Lịch sử</button>
+                <button class="tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-600 border border-slate-200 hover:border-brand-ocean transition-all" data-filter="thien-nhien">Thiên nhiên & Làng nghề</button>
+            </div>
+
+            <!-- Destinations Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="destinations-grid">
+                <!-- Data generated dynamically by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VĂN HÓA & LỊCH SỬ ================= -->
+    <section id="van-hoa" class="py-16 sm:py-24 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-ocean/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-teal/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-teal-900/80 text-emerald-400 font-semibold text-xs uppercase tracking-wider mb-3 border border-emerald-500/30">
+                    <i class="fa-solid fa-landmark"></i> Trầm Tích Thời Gian
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Văn Hóa & Lịch Sử Trăm Năm</h2>
+                <p class="text-slate-400 mt-3 text-base">Quảng Ngãi là cái nôi của di sản văn hóa Sa Huỳnh cổ xưa và là vùng đất tri ân những người hùng kiên cường qua các thời kỳ.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Culture Card 1 -->
+                <div class="bg-slate-800/80 rounded-2xl p-8 border border-slate-700 hover:border-brand-teal transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-teal-500/10 text-brand-teal border border-brand-teal/20 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-jar"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Văn Hóa Sa Huỳnh Cổ Xưa</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Được phát hiện từ năm 1909 với khu di tích Mộ Chum Sa Huỳnh nổi tiếng. Đây là một trong ba nôi văn hóa cổ đại lớn nhất của Việt Nam (Đông Sơn, Sa Huỳnh, Óc Eo), có niên đại hơn 3.000 năm.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-700/60 text-xs text-brand-teal font-medium flex items-center gap-1">
+                        Di sản cấp Quốc gia Đặc biệt <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Culture Card 2 -->
+                <div class="bg-slate-800/80 rounded-2xl p-8 border border-slate-700 hover:border-brand-sky transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-sky-500/10 text-brand-sky border border-brand-sky/20 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-ship"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Hùng Binh Hoàng Sa</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Đội hùng binh Hoàng Sa thành lập từ thời nhà Nguyễn, gồm những người con Lý Sơn cưỡi sóng ra quần đảo Hoàng Sa & Trường Sa cắm mốc chủ quyền. Lễ khao lề thế lính Hoàng Sa là Di sản phi vật thể quốc gia.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-700/60 text-xs text-brand-sky font-medium flex items-center gap-1">
+                        Khẳng định chủ quyền biển đảo <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Culture Card 3 -->
+                <div class="bg-slate-800/80 rounded-2xl p-8 border border-slate-700 hover:border-amber-500 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-peace"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Khu Chứng Tích Sơn Mỹ</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Nơi lưu giữ ký ức lịch sử về sự kiện Sơn Mỹ năm 1968. Khu chứng tích mang thông điệp hòa bình, khát vọng yêu thương và tưởng niệm những nạn nhân vô tội, thu hút du khách quốc tế.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-700/60 text-xs text-amber-400 font-medium flex items-center gap-1">
+                        Di tích Lịch sử Quốc gia <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ĐẶC SẢN ẨM THỰC ================= -->
+    <section id="am-thuc" class="py-16 sm:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-100 text-brand-sun font-semibold text-xs uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-utensils"></i> Hương Vị Độc Đáo
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Đặc Sản Ẩm Thực Quảng Ngãi</h2>
+                <p class="text-slate-600 mt-3 text-base">Những món ăn mang hương vị mặn mòi của biển cả và ngọt ngào của phù sa sông Trà làm say lòng du khách.</p>
+            </div>
+
+            <!-- Food Items Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="food-grid">
+                <!-- Dynamic Content Loaded by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CẨM NANG DU LỊCH ================= -->
+    <section id="cam-nang" class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-100 text-brand-ocean font-semibold text-xs uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-book-open"></i> Hành Trang Du Khách
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Cẩm Nang Du Lịch Trọn Gói</h2>
+                <p class="text-slate-600 mt-3 text-base">Thông tin hữu ích giúp chuyến đi khám phá Quảng Ngãi của bạn thêm phần trọn vẹn và hoàn hảo.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Info 1: Thời điểm đi đẹp nhất -->
+                <div class="bg-gradient-to-br from-sky-50 to-blue-50/50 p-8 rounded-2xl border border-sky-100 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-ocean text-white flex items-center justify-center text-xl mb-6 shadow-md shadow-brand-ocean/20">
+                            <i class="fa-regular fa-calendar-check"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Thời Điểm Du Lịch</h3>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-brand-ocean mt-1 text-xs"></i>
+                                <span><strong>Tháng 4 - Tháng 8:</strong> Mùa khô, biển êm, thời điểm lý tưởng nhất để tham quan Đảo Lý Sơn và tắm biển Mỹ Khê.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-brand-ocean mt-1 text-xs"></i>
+                                <span><strong>Tháng 3 (Âm lịch):</strong> Lễ Khao lề thế lính Hoàng Sa nghi lễ văn hóa độc đáo trên đảo Lý Sơn.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-exclamation text-amber-500 mt-1 text-xs"></i>
+                                <span><strong>Lưu ý:</strong> Hạn chế đi biển từ tháng 9 đến tháng 12 do ảnh hưởng của mùa mưa bão miền Trung.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Info 2: Phương tiện di chuyển -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50/50 p-8 rounded-2xl border border-emerald-100 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-teal text-white flex items-center justify-center text-xl mb-6 shadow-md shadow-brand-teal/20">
+                            <i class="fa-solid fa-plane-departure"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Phương Tiện Di Chuyển</h3>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-plane text-brand-teal mt-1 text-xs"></i>
+                                <span><strong>Máy bay:</strong> Đáp xuống sân bay Chu Lai (Quảng Nam), chỉ cách trung tâm TP. Quảng Ngãi khoảng 40km.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-train text-brand-teal mt-1 text-xs"></i>
+                                <span><strong>Tàu hỏa / Xe khách:</strong> Tàu Thống Nhất dừng ngay Ga Quảng Ngãi trung tâm thành phố.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-ship text-brand-teal mt-1 text-xs"></i>
+                                <span><strong>Tàu siêu tốc ra Lý Sơn:</strong> Xuất phát từ cảng Sa Kỳ, thời gian di chuyển chỉ khoảng 35 - 45 phút.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Info 3: Lưu ý đi Đảo Lý Sơn -->
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50/50 p-8 rounded-2xl border border-amber-100 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-sun text-white flex items-center justify-center text-xl mb-6 shadow-md shadow-brand-sun/20">
+                            <i class="fa-solid fa-umbrella-beach"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Lưu Ý Đi Đảo Lý Sơn</h3>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-passport text-brand-sun mt-1 text-xs"></i>
+                                <span><strong>Giấy tờ tùy thân:</strong> Luôn mang theo CCCD/Hộ chiếu để làm thủ tục ra đảo.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-ticket text-brand-sun mt-1 text-xs"></i>
+                                <span><strong>Đặt vé trước:</strong> Nên đặt trước vé tàu cao tốc Sa Kỳ - Lý Sơn và phòng khách sạn mùa cao điểm.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-leaf text-brand-sun mt-1 text-xs"></i>
+                                <span><strong>Bảo vệ môi trường:</strong> Giữ gìn vệ sinh, không mang túi nilon dùng 1 lần ra Đảo Bé.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CTA BANNER ================= -->
+    <section id="kham-pha" class="py-20 bg-gradient-to-r from-brand-ocean via-brand-teal to-emerald-600 text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl sm:text-5xl font-extrabold mb-6 leading-tight">Sẵn Sàng Cho Chuyến Hành Trình Khám Phá Quảng Ngãi?</h2>
+            <p class="text-lg text-sky-100 mb-8 max-w-2xl mx-auto">Tận hưởng làn nước biển xanh ngọc, trải nghiệm văn hóa ẩm thực độc đáo và ghi lại những khoảnh khắc tuyệt vời ngay hôm nay.</p>
+            <button onclick="scrollToSection('danh-thang')" class="px-8 py-4 bg-brand-sun text-slate-900 font-extrabold rounded-full shadow-2xl hover:bg-amber-400 hover:scale-105 transition-all">
+                Bắt Đầu Lên Kế Hoạch Ngay <i class="fa-solid fa-paper-plane ml-2"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Col 1 -->
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-brand-ocean flex items-center justify-center text-white font-bold text-sm">
+                            QNg
+                        </div>
+                        <span class="text-lg font-bold text-white tracking-wider">QUẢNG NGÃI TOURISM</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Cổng thông tin du lịch và giới thiệu vẻ đẹp thiên nhiên, văn hóa ẩm thực tỉnh Quảng Ngãi.
+                    </p>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4 border-l-2 border-brand-ocean pl-2">Liên Kết Nhanh</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#trang-chu" class="hover:text-brand-sky transition-colors">Trang chủ</a></li>
+                        <li><a href="#danh-thang" class="hover:text-brand-sky transition-colors">Danh thắng nổi tiếng</a></li>
+                        <li><a href="#van-hoa" class="hover:text-brand-sky transition-colors">Văn hóa Sa Huỳnh</a></li>
+                        <li><a href="#am-thuc" class="hover:text-brand-sky transition-colors">Đặc sản ẩm thực</a></li>
+                        <li><a href="#cam-nang" class="hover:text-brand-sky transition-colors">Cẩm nang du lịch</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4 border-l-2 border-brand-ocean pl-2">Điểm Đến Hàng Đầu</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#danh-thang" class="hover:text-brand-sky transition-colors">Đảo Lý Sơn & Đảo Bé</a></li>
+                        <li><a href="#danh-thang" class="hover:text-brand-sky transition-colors">Cổng Tò Vò & Hang Cầu</a></li>
+                        <li><a href="#danh-thang" class="hover:text-brand-sky transition-colors">Biển Mỹ Khê Quảng Ngãi</a></li>
+                        <li><a href="#danh-thang" class="hover:text-brand-sky transition-colors">Đồng Muối Sa Huỳnh</a></li>
+                        <li><a href="#danh-thang" class="hover:text-brand-sky transition-colors">Chùa Hang & Núi Thiên Ấn</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4 border-l-2 border-brand-ocean pl-2">Kết Nối Với Chúng Tôi</h4>
+                    <p class="text-xs text-slate-400 mb-4">Theo dõi thông tin du lịch mới nhất qua các kênh mạng xã hội.</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-ocean hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-red-500 hover:text-white transition-all"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-pink-600 hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-black hover:text-white transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 Quảng Ngãi Tourism. Bản quyền thuộc về trang giới thiệu du lịch Quảng Ngãi.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline">Điều khoản</a>
+                    <a href="#" class="hover:underline">Bảo mật</a>
+                    <a href="#" class="hover:underline">Trợ giúp</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= MODAL CHI TIẾT ================= -->
+    <div id="detail-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative transform transition-all scale-95 opacity-0" id="modal-container">
+            <!-- Close Button -->
+            <button id="close-modal" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/40 text-white hover:bg-black/70 flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div id="modal-content">
+                <!-- Content injected dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // Data Danh Thắng
+        const destinationsData = [
+            {
+                id: 1,
+                title: 'Đảo Lý Sơn & Đảo Bé',
+                category: 'bien-dao',
+                categoryText: 'Biển Đảo',
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+                shortDesc: 'Vương quốc tỏi với cảnh quan núi lửa hoang sơ và bãi biển xanh ngọc bích.',
+                fullDesc: 'Lý Sơn là huyện đảo duy nhất của Quảng Ngãi, nổi tiếng với những vách đá núi lửa triệu năm hùng vĩ, làn nước biển trong vắt nhìn tận đáy. Đảo Bé (An Bình) được ví như "Maldives của Việt Nam" với bãi tắm hoang sơ tuyệt đẹp.',
+                location: 'Huyện đảo Lý Sơn, Quảng Ngãi'
+            },
+            {
+                id: 2,
+                title: 'Cổng Tò Vò & Hang Cầu',
+                category: 'bien-dao',
+                categoryText: 'Biển Đảo',
+                image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80',
+                shortDesc: 'Vòm đá trầm tích núi lửa độc nhất vô nhị tuyệt đẹp lúc hoàng hôn.',
+                fullDesc: 'Cổng Tò Vò là một vòm đá nham thạch tự nhiên cao khoảng 2.5m được hình thành từ dung nham núi lửa phun trào hàng triệu năm trước. Nơi đây là điểm ngắm hoàng hôn đỉnh cao tại Lý Sơn.',
+                location: 'Đảo Lớn, Huyện Lý Sơn'
+            },
+            {
+                id: 3,
+                title: 'Biển Mỹ Khê Quảng Ngãi',
+                category: 'bien-dao',
+                categoryText: 'Biển Đảo',
+                image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
+                shortDesc: 'Bãi biển cát trắng mịn dài tít tắp nép mình bên rừng dương xanh mát.',
+                fullDesc: 'Cách trung tâm TP. Quảng Ngãi khoảng 12km, biển Mỹ Khê thu hút du khách nhờ dải cát trắng mịn màng, sóng biển êm dịu cùng những hàng dương xanh ngắt chạy dọc bờ biển. Món ăn hải sản tại đây tươi ngon đậm vị.',
+                location: 'Xã Tịnh Khê, TP. Quảng Ngãi'
+            },
+            {
+                id: 4,
+                title: 'Núi Thiên Ấn & Chùa Hang',
+                category: 'tam-linh',
+                categoryText: 'Tâm Linh & Lịch Sử',
+                image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80',
+                shortDesc: 'Đệ nhất danh sơn Quảng Ngãi với ngôi chùa cổ linh thiêng trên đỉnh núi.',
+                fullDesc: 'Núi Thiên Ấn có hình dáng như con dấu của trời giáp sông Trà Giang. Trên đỉnh núi có chùa Thiên Ấn cổ kính được khởi công từ thế kỷ 17 cùng Giếng Phật thanh tịnh và Mộ cụ Huỳnh Thúc Kháng.',
+                location: 'Phường Trương Quang Trọng, TP. Quảng Ngãi'
+            },
+            {
+                id: 5,
+                title: 'Đồng Muối Sa Huỳnh',
+                category: 'thien-nhien',
+                categoryText: 'Thiên Nhiên & Làng Nghề',
+                image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80',
+                shortDesc: 'Vựa muối lớn miền Trung lung linh như tấm gương khổng lồ phản chiếu mây trời.',
+                fullDesc: 'Đồng muối Sa Huỳnh rộng hơn 500ha có lịch sử lâu đời. Vào mùa diêm dân làm muối, những ruộng muối phản chiếu ánh mặt trời rực rỡ như hàng ngàn tấm gương đắp nổi hạt ngọc của biển.',
+                location: 'Phường Phổ Thạnh, Thị xã Đức Phổ'
+            },
+            {
+                id: 6,
+                title: 'Khu Du Lịch Sinh Thái Ba Tơ',
+                category: 'thien-nhien',
+                categoryText: 'Thiên Nhiên & Làng Nghề',
+                image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80',
+                shortDesc: 'Thắng cảnh núi rừng bạt ngàn, suối thác thơ mộng cùng nét văn hóa H’re.',
+                fullDesc: 'Vùng đất Ba Tơ không chỉ nổi tiếng với Khởi nghĩa Ba Tơ lịch sử mà còn mang không khí trong lành của đại ngàn, các dòng suối mát lạnh và trải nghiệm không gian văn hóa thổ cẩm H’re đặc sắc.',
+                location: 'Huyện Ba Tơ, Quảng Ngãi'
+            }
+        ];
+
+        // Data Ẩm thực
+        const foodData = [
+            {
+                name: 'Don Quảng Ngãi',
+                image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80',
+                desc: 'Món ăn biểu tượng với nước dùng ngọt thanh từ con don sông Trà, ăn kèm bánh tráng nướng giòn.',
+                tag: 'Món Biểu Tượng'
+            },
+            {
+                name: 'Tỏi Lý Sơn',
+                image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80',
+                desc: 'Tỏi cô đơn quý hiếm với hương vị thơm nồng đặc trưng, dịu ngọt và chứa hàm lượng dinh dưỡng cao.',
+                tag: 'Nông Sản Vàng'
+            },
+            {
+                name: 'Bánh Đập Quảng Ngãi',
+                image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80',
+                desc: 'Sự kết hợp giữa bánh ướt dẻo và bánh tráng nướng giòn, chấm cùng mắm nêm đậm đà thơm nức.',
+                tag: 'Ăn Vặt Dân Dã'
+            },
+            {
+                name: 'Kẹo Mạch Nha & Đường Phèn',
+                image: 'https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&w=600&q=80',
+                desc: 'Đặc sản quà tặng dẻo ngọt làm từ mầm lúa mạch và mía đường sông Trà tinh khiết.',
+                tag: 'Quà Tặng Thượng Hạng'
+            }
+        ];
+
+        // Render Destinations
+        function renderDestinations(items) {
+            const container = document.getElementById('destinations-grid');
+            container.innerHTML = '';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 card-zoom flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover card-img">
+                            <span class="absolute top-3 left-3 bg-slate-900/70 backdrop-blur-md text-white text-[11px] font-medium px-3 py-1 rounded-full">
+                                ${item.categoryText}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">${item.title}</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">${item.shortDesc}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex justify-between items-center border-t border-slate-100/80">
+                        <span class="text-xs text-slate-400 flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-brand-ocean"></i> ${item.location}
+                        </span>
+                        <button onclick="openModal(${item.id})" class="text-brand-ocean hover:text-sky-700 font-semibold text-xs flex items-center gap-1 group">
+                            Xem chi tiết <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Render Food
+        function renderFood() {
+            const container = document.getElementById('food-grid');
+            container.innerHTML = '';
+
+            foodData.forEach(food => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-md transition-all p-4 flex flex-col';
+                card.innerHTML = `
+                    <div class="h-40 rounded-xl overflow-hidden mb-4 relative">
+                        <img src="${food.image}" alt="${food.name}" class="w-full h-full object-cover">
+                        <span class="absolute top-2 right-2 bg-brand-sun text-slate-900 font-bold text-[10px] px-2.5 py-0.5 rounded-md">
+                            ${food.tag}
+                        </span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-1">${food.name}</h3>
+                    <p class="text-slate-500 text-xs leading-relaxed">${food.desc}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Modal Functionality
+        const modal = document.getElementById('detail-modal');
+        const modalContainer = document.getElementById('modal-container');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal(id) {
+            const item = destinationsData.find(d => d.id === id);
+            if (!item) return;
+
+            modalContent.innerHTML = `
+                <div class="h-64 sm:h-72 relative">
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-6 right-6 text-white">
+                        <span class="bg-brand-ocean text-white text-xs px-2.5 py-1 rounded-full font-medium mb-2 inline-block">
+                            ${item.categoryText}
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold">${item.title}</h2>
+                    </div>
+                </div>
+                <div class="p-6 sm:p-8 space-y-4 max-h-[50vh] overflow-y-auto">
+                    <div class="flex items-center text-xs text-slate-500 gap-2">
+                        <i class="fa-solid fa-map-pin text-brand-sun text-sm"></i>
+                        <span><strong>Vị trí:</strong> ${item.location}</span>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        ${item.fullDesc}
+                    </p>
+                    <div class="pt-4 border-t border-slate-100 flex justify-end">
+                        <button onclick="closeModal()" class="px-6 py-2.5 bg-brand-ocean text-white rounded-xl text-sm font-semibold hover:bg-sky-700 transition-colors">
+                            Đóng thông tin
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContainer.classList.remove('scale-95', 'opacity-0');
+                modalContainer.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalContainer.classList.remove('scale-100', 'opacity-100');
+            modalContainer.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Filter Tabs Event Listeners
+        document.querySelectorAll('#filter-buttons .tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#filter-buttons .tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+                if (filter === 'all') {
+                    renderDestinations(destinationsData);
+                } else {
+                    const filtered = destinationsData.filter(d => d.category === filter);
+                    renderDestinations(filtered);
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Helper scroll function
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Initialize On Load
+        window.onload = function() {
+            renderDestinations(destinationsData);
+            renderFood();
+        };
+    </script>
+</body>
+</html>
